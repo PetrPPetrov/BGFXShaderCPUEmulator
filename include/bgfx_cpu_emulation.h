@@ -73,34 +73,34 @@ namespace BGFXShaderCPUEmulator
         };
 
     public:
-        Attribute(float* varying)
+        Attribute(float* varying_data)
         {
             type = AttributeType::AttributeFloat;
-            varying_float = varying;
+            varying_float = varying_data;
             saved_float = 0.0f;
         }
-        Attribute(vec2* varying)
+        Attribute(vec2* varying_data)
         {
             type = AttributeType::AttributeVec2;
-            varying_vec2 = varying;
+            varying_vec2 = varying_data;
             saved_vec2 = vec2(0.0f, 0.0f);
         }
-        Attribute(vec3* varying)
+        Attribute(vec3* varying_data)
         {
             type = AttributeType::AttributeVec3;
-            varying_vec3 = varying;
+            varying_vec3 = varying_data;
             saved_vec3 = vec3(0.0f, 0.0f, 0.0f);
         }
-        Attribute(vec4* varying)
+        Attribute(vec4* varying_data)
         {
             type = AttributeType::AttributeVec4;
-            varying_vec4 = varying;
+            varying_vec4 = varying_data;
             saved_vec4 = vec4(0.0f, 0.0f, 0.0f, 1.0f);
         }
-        Attribute(mat4* varying)
+        Attribute(mat4* varying_data)
         {
             type = AttributeType::AttributeMat4;
-            varying_mat4 = varying;
+            varying_mat4 = varying_data;
             saved_mat4 = mat4();
         }
         Attribute(const Attribute& other)

@@ -40,6 +40,9 @@ const int gl_MaxDrawBuffers = 1;               // proposed ARB_draw_buffers
 
 const float pi = 3.141592653589793f;
 
+#define uniform
+#define varying
+
 struct vec3;
 struct vec4;
 
@@ -318,6 +321,16 @@ struct vec4
         return vec2(v.x OP f, v.y OP f); \
     }
 
+#define op_vec2_self_assignment(OPN,OP) \
+    inline vec2& OPN(vec2& v1, const vec2 v2) { \
+        v1 = v1 OP v2; \
+        return v1; \
+    } \
+    inline vec2& OPN(vec2& v, float f) { \
+        v = v OP f; \
+        return v; \
+    }
+
 #define op_vec3(OPN,OP) \
     inline vec3 OPN(const vec3 v1, const vec3 v2) { \
         return vec3(v1.x OP v2.x, v1.y OP v2.y, v1.z OP v2.z); \
@@ -327,6 +340,16 @@ struct vec4
     } \
     inline vec3 OPN(float f, const vec3 v) { \
         return vec3(v.x OP f, v.y OP f, v.z OP f); \
+    }
+
+#define op_vec3_self_assignment(OPN,OP) \
+    inline vec3& OPN(vec3& v1, const vec3 v2) { \
+        v1 = v1 OP v2; \
+        return v1; \
+    } \
+    inline vec3& OPN(vec3& v, float f) { \
+        v = v OP f; \
+        return v; \
     }
 
 #define op_vec4(OPN,OP) \
@@ -340,20 +363,42 @@ struct vec4
         return vec4(v.x OP f, v.y OP f, v.z OP f, v.w OP f); \
     }
 
+#define op_vec4_self_assignment(OPN,OP) \
+    inline vec4& OPN(vec4& v1, const vec4 v2) { \
+        v1 = v1 OP v2; \
+        return v1; \
+    } \
+    inline vec4& OPN(vec4& v, float f) { \
+        v = v OP f; \
+        return v; \
+    }
+
 #define op_vec(OPN,OP) \
     op_vec2(OPN,OP) \
     op_vec3(OPN,OP) \
     op_vec4(OPN,OP)
 
+#define op_vec_self_assignment(OPN,OP) \
+    op_vec2_self_assignment(OPN,OP) \
+    op_vec3_self_assignment(OPN,OP) \
+    op_vec4_self_assignment(OPN,OP)
+
 op_vec(operator+, +);
 op_vec(operator-, -);
 op_vec(operator*, *);
-op_vec(operator/, / );
+op_vec(operator/, /);
+op_vec_self_assignment(operator+=, +);
+op_vec_self_assignment(operator-=, -);
 
 #undef op_vec2
 #undef op_vec3
 #undef op_vec4
 #undef op_vec
+
+#undef op_vec2_self_assignment
+#undef op_vec3_self_assignment
+#undef op_vec4_self_assignment
+#undef op_vec_self_assignment
 
 inline vec2::vec2(const vec3& v)
 {
