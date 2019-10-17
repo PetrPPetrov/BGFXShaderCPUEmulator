@@ -24,14 +24,6 @@
 #include <iostream>
 #include <sstream>
 
-#ifdef VERTEX_SHADER
-#define main vertex_shader_main
-#endif
-
-#ifdef FRAGMENT_SHADER
-#define main fragment_shader_main
-#endif
-
 // http://www.opengl.org/registry/doc/GLSLangSpec.Full.1.20.8.pdf (pages 49-50)
 const int gl_MaxLights = 8;                    // GL 1.0
 const int gl_MaxClipPlanes = 6;                // GL 1.0
@@ -66,7 +58,8 @@ struct vec2
 
     vec2()
     {
-        // components are not initialized intentionally
+        x = 0.0f;
+        y = 0.0f;
     }
 
     vec2(float x_, float y_)
@@ -147,7 +140,9 @@ struct vec3
 
     vec3()
     {
-        // components are not initialized intentionally
+        x = 0.0f;
+        y = 0.0f;
+        z = 0.0f;
     }
 
     vec3(float x_, float y_, float z_)
@@ -242,7 +237,10 @@ struct vec4
 
     vec4()
     {
-        // components are not initialized intentionally
+        x = 0.0f;
+        y = 0.0f;
+        z = 0.0f;
+        w = 0.0f;
     }
 
     vec4(float x_, float y_, float z_, float w_)

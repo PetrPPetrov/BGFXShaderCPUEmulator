@@ -28,13 +28,15 @@
 
 #include "bgfx_cpu_emulation.h"
 
+using namespace BGFXShaderCPUEmulator;
+
 int main()
 {
-    CPURendering renderer(10, 10);
+    CPURendering renderer(640, 480);
 
-    renderer.addAttribute(&a_position);
-    renderer.addAttribute(&a_color0);
-    renderer.addOutputAttribute(&v_color0);
+    renderer.input_attributes.push_back(Attribute(&a_position));
+    renderer.input_attributes.push_back(Attribute(&a_color0));
+    renderer.output_attributes.push_back(Attribute(&v_color0));
 
     struct vertex_data
     {

@@ -38,3 +38,4 @@ ${01-cubes_SOURCE_DIR}/main.cpp
 
 set_source_files_properties(${BGFXShaderEmulation} PROPERTIES HEADER_FILE_ONLY TRUE)
 set_source_files_properties(${shaders} PROPERTIES HEADER_FILE_ONLY TRUE)
+set_target_properties(01-cubes PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
